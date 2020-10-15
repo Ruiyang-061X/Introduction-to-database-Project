@@ -1,0 +1,119 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+ <head id="head">
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <title>
+    短影评
+  </title>
+  <meta content="短影评" name="Keywords"/>
+  <meta content="短影评" name="Description"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <link href="{% static 'short_film_comment_app/images/favicon.ico' %}" rel="icon" type="image/x-icon"/>
+  <link href="{% static 'short_film_comment_app/images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon"/>
+  <link href="{% static 'short_film_comment_app/images/favicon.ico' %}" rel="bookmark" type="image/x-icon"/>
+  <script type="text/javascript">
+   var server = "http://static1.mtime.cn/";
+  var subServer = "http://static1.mtime.cn/library/";
+  var version = "20200114183050";
+  var subVersion = "20200402104917";
+  var jsServer = server + version;
+  var cssServer = server + version;
+  var subJsServer = subServer + subVersion;
+  var subCssServer = subServer + subVersion;
+  var debug = false;
+  var mtimeCookieDomain = "mtime.com";
+  var siteLogUrl = "http://log.mtime.cn";
+  var siteServiceUrl = "http://service.mtime.com";
+  var siteLibraryServiceUrl = "http://service.library.mtime.com";
+  var crossDomainUpload="http://upload3.mtime.com/Upload.ashx";
+  </script>
+  <script type="text/javascript">
+   document.write(unescape("%3Clink href='" + cssServer + "/css/2014/publicpack.css' rel='stylesheet' media='all' type='text/css'%3E%3C/link%3E"));
+  </script>
+  <script type="text/javascript">
+   document.write(unescape("%3Clink href='" + subCssServer + "/css/database.css' rel='stylesheet' media='all' type='text/css'%3E%3C/link%3E"));
+  </script>
+  <script type="text/javascript">
+   document.write(unescape("%3Clink href='" + subCssServer + "/css/toplist.css' rel='stylesheet' media='all' type='text/css'%3E%3C/link%3E"));
+  </script>
+ </head>
+ <body>
+  <div class="top_headbg3" style="background-image:url(http://img5.mtime.cn/mg/2019/06/24/223713.68399431.jpg);">
+  </div>
+  <div class="top_header3">
+  </div>
+  <div class="top_shadow">
+   <div class="top_cont">
+    <div id="itemListDiv">
+     <div class="top_page">
+      <div class="top_pager">
+       <dl class="transition6 clearfix" id="pagerSlide" style="width:970px; margin-top:20px;">
+        {% for i in id_list %}
+            {% if i.0 == film_list_id %}
+            <dd class="on" p="{{i}}">
+            {% else %}
+            <dd p="{{i}}">
+            {% endif %}
+            <a class="num" href="{% url 'short_film_comment_app:film_list' i.0 %}">
+                {{i.1}} - {{i.2}}
+               </a>
+               <i>
+               </i>
+              </dd>
+        {% endfor %}
+       </dl>
+      </div>
+     </div>
+     <div class="top_nlist">
+      <dl>
+        {% for i in film_list %}
+        <dd>
+            <div class="list_picnum">
+             <span class="num_tip" style="background:#f85223">
+              {{i.id}}
+             </span>
+             <a class="imger" href="{% url 'short_film_comment_app:film' i.id %}" target="_blank" title="{{i.caption}}">
+              <img alt="{{i.caption}}" height="210" src="{% static i.image_path %}" width="140"/>
+             </a>
+             <h3>
+              <a href="{% url 'short_film_comment_app:film' i.id %}" target="_blank">
+                {{i.caption}}
+              </a>
+             </h3>
+             <p class="mt12">
+                 {{i.information}}
+             </p>
+             <p class="mt12">
+                {{i.information2}}
+            </p>
+            </div>
+           </dd>
+        {% endfor %}
+      </dl>
+     </div>
+     <div class="top_page">
+      <div class="top_pager top_pagerup">
+       <dl class="transition6 clearfix" id="pagerSlide2" style="width:970px;">
+        {% for i in id_list %}
+        {% if i.0 == film_list_id %}
+        <dd class="on" p="{{i}}">
+        {% else %}
+        <dd p="{{i}}">
+        {% endif %}
+        <a class="num" href="{% url 'short_film_comment_app:film_list' i.0 %}">
+            {{i.1}} - {{i.2}}
+           </a>
+           <i>
+           </i>
+          </dd>
+        {% endfor %}
+       </dl>
+      </div>
+     </div>
+    </div>  
+   </div>
+  </div>
+ </body>
+</html>

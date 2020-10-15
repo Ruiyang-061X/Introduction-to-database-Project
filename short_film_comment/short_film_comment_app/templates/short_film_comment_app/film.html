@@ -1,0 +1,132 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>
+   {{film.caption}}
+  </title>
+  <meta content="{{film.caption}}" name="Keywords"/>
+  <meta content="{{film.caption}}" name="Description"/>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <link href="{% static 'short_film_comment_app/images/favicon.ico' %}" rel="icon" type="image/x-icon"/>
+  <link href="{% static 'short_film_comment_app/images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon"/>
+  <link href="{% static 'short_film_comment_app/images/favicon.ico' %}" rel="bookmark" type="image/x-icon"/>
+  <script type="text/javascript">
+   var server = "http://static1.mtime.cn/";
+  var subServer = "http://static1.mtime.cn/library/";
+  var version = "20200114183050";
+  var subVersion = "20200402104917";
+  var jsServer = server + version;
+  var cssServer = server + version;
+  var subJsServer = subServer + subVersion;
+  var subCssServer = subServer + subVersion;
+  var debug = false;
+  var mtimeCookieDomain = "mtime.com";
+  var siteLogUrl = "http://log.mtime.cn";
+  var siteServiceUrl = "http://service.mtime.com";
+  var siteLibraryServiceUrl = "http://service.library.mtime.com";
+  var crossDomainUpload="http://upload3.mtime.com/Upload.ashx";
+  </script>
+  <script type="text/javascript">
+   document.write(unescape("%3Clink href='" + cssServer + "/css/2014/publicpack.css' rel='stylesheet' media='all' type='text/css'%3E%3C/link%3E"));
+  </script>
+  <script type="text/javascript">
+   document.write(unescape("%3Clink href='" + subCssServer + "/css/database.css' rel='stylesheet' media='all' type='text/css'%3E%3C/link%3E"));
+  </script>
+  <link rel="stylesheet" type="text/css" href="{% static 'short_film_comment_app/style.css' %}"/>
+ </head>
+ <body pn="M14_Movie_Overview">
+  <div id="movie_warp" typeof="v:Movie" xmlns:v="http://rdf.data-vocabulary.org/#">
+   <div class="db_bodyout">
+    <div class="db_bodybg">
+    </div>
+    <div style="height:140px;">
+    </div>
+    <div class="db_shadow">
+     <div class="db_topcont">
+      <div id="db_head">
+       <div class="db_coverout" style="border: 0;">
+        <div class="db_coverinner" style="border: 0;">
+         <div class="db_coverpicbox" style="border: 0;">
+          <div class="db_cover __r_c_" pan="M14_Movie_Overview_Cover" style="border: 0;">
+           <a href="{% url 'short_film_comment_app:film' film.id %}" title="{{film.caption}}" style="border: 0;">
+            <img alt="{{film.caption}}" rel="v:image" src="{% static film.image_path %}" style="border: 0;"/>
+           </a>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="db_ihead">
+        <div class="db_head">
+         <div class="__r_c_" pan="M14_Movie_Overview_Name">
+          <h1 property="v:itemreviewed" style="font-size:35px;">
+            {{film.caption}}
+          </h1>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="db_contout">
+       <div class="sharp">
+       </div>
+       <div class="db_cont">
+        <div class="clearfix zoom">
+         <div class="base_r" style="margin-top: -50px;">
+          <div class="clearfix pt15">
+           <dl class="info_l">
+            {{film.information}}
+            <dt class="__r_c_" pan="M14_Movie_Overview_PlotsSummary" style="height: 370px;">
+             <h4 class="px14 mt12">
+              简介：
+             </h4>
+             <p class="mt6 lh18">
+              {{film.introduction}}
+             </p>
+             <p class="tr mt9" style="height: 10px;">
+             </p>
+            </dt>
+           </dl>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="db_i_comcont">
+    <div class="db_i_comment">
+     <div class="clearfix db_comcont new_comcont">
+      <div class="main" style="width: 100%;">
+       <div class="db_shortcomment">
+        <h4>
+         短影评
+        </h4>
+        <dl class="clearfix __r_c_" id="tweetRegion" pan="M14_Movie_Overview_ShortReview_List">
+           {% for i in comment_list %}
+           <dd>
+            <div>
+             <p class="line_dot mb25"></p>
+             <h3>
+               {{i.content}}
+            </h3>
+            </div>
+           </dd>
+           {% endfor %}
+        </dl>
+       </div>
+      </div>
+      <div class="Main">     
+        <form class="Input_Box" style="width: 100%;" action="{% url 'short_film_comment_app:comment' film_id%}" method="POST">
+         {% csrf_token %}
+          <input type="text" class="Input_text" name="comment" style="width: 100%; height: 72%;">
+          <div class="Input_Foot"><input type="submit" class="postBtn" value="确定"></div>     
+        </form>     
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
